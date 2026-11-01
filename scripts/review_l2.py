@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.github.com"
 UA = "film-literary-skill-hub/0.1"
 MAX_FILE_BYTES = 200_000
+MAX_FILES_PER_REPOSITORY = 120
 TEXT_SUFFIXES = {".py", ".js", ".ts", ".tsx", ".jsx", ".sh", ".yml", ".yaml", ".json", ".toml", ".md", ".txt", ".ps1", ".bat"}
 
 def api_json(url):
@@ -77,6 +78,9 @@ def review_resource(card, today=None):
         if kind in {"skill_definition","project_documentation","license","test","dependency_manifest","configuration","executable_source","reference_documentation"}:
             selected.append((entry,kind))
     file_records, findings, errors = [], [], []
+    if len(selected) > MAX_FILES_PER_REPOSITORY:
+        errors.append({"path":"__repository__","error":f"selected file count {len(selected)} exceeds review cap {MAX_FILES_PER_REPOSITORY}"})
+        selected = selected[:MAX_FILES_PER_REPOSITORY]
     for entry,kind in selected:
         path=entry["path"]
         if Path(path).suffix.lower() not in TEXT_SUFFIXES and kind not in {"skill_definition","project_documentation","license","dependency_manifest"}:
@@ -128,12 +132,21 @@ def main():
     for card in cards[:max(0,args.limit)]:
         try: results.append(review_resource(card))
         except Exception as exc:
-            results.append({"repository":card["repository"],"commit":card["commit"],"skill_path":card["path"],
-                            "review_level":"L2","disposition":"BLOCKED","tree_truncated":False,
-                            "files_indexed":0,"files_selected":0,"files_read":0,"file_kind_counts":{},
-                            "file_evidence":[],"mechanism_findings":[],
-                            "review_errors":[{"path":"__repository__","error":str(exc)}],
-                            "runtime_tested":False,"source_code_executed":False})
+            results.append({
+                "repository":card["repository"],"commit":card["commit"],"skill_path":card["path"],
+                "review_level":"L2","disposition":"BLOCKED","tree_truncated":False,
+                "files_indexed":0,"files_selected":0,"files_read":0,"file_kind_counts":{},
+                "file_evidence":[],"mechanism_findings":[],
+                "review_errors":[{"path":"__repository__","error":str(exc)}],
+                "capability_claims_not_runtime_verified":True,
+                "runtime_tested":False,"source_code_executed":False,
+                "limitations":[
+                    "Review blocked before source inspection completed.",
+                    "No upstream code was executed and no dependencies were installed.",
+                    "A BLOCKED result is not a safety or quality endorsement."
+                ],
+                "reviewed_at":dt.datetime.now(dt.timezone.utc).isoformat()
+            })
         time.sleep(0.5)
     result={"review_level":"L2","generated_at":dt.datetime.now(dt.timezone.utc).isoformat(),
             "count":len(results),"reviews":results}
