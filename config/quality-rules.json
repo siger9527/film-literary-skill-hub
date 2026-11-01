@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "required_card_fields": [
+    "repository",
+    "commit",
+    "path",
+    "skill_name",
+    "source_url",
+    "license_status",
+    "review_status"
+  ],
+  "review_levels": [
+    "L1",
+    "L2",
+    "L3"
+  ],
+  "review_statuses": [
+    "DISCOVERED",
+    "REVIEWED_L1",
+    "REVIEWED_L2",
+    "REVIEWED_L3",
+    "RUNTIME_TESTED",
+    "INTEGRATED",
+    "REJECTED"
+  ],
+  "rules": {
+    "pin_commit": true,
+    "record_license_evidence": true,
+    "never_execute_external_code": true,
+    "third_party_content_default": "metadata_and_short_summary_only",
+    "human_review_before_merge": true
+  }
+}
