@@ -109,3 +109,13 @@ A labelled feasibility probe may be exempt from delivery approval if it is expli
 ## 9. Limits
 
 This entry synthesizes source-grounded methods, not a universal directing formula. Model-specific shot durations, prompt recipes and risk scores must be versioned adapters, not fixed directing laws. Real performance, optics and lighting decisions require professional review and, where possible, production evidence.
+
+## Source provenance
+
+- `cajias/agentic-video-skills` — commit `204cefd08bbb87fd4681f1f2b0dccbc444a978c1`; MIT; inspected cinematic-director Skill and its cinematic-language, continuity-bible and tool-adapter references.
+- `wuwangzhang1216/DirectorSKILL` — commit `c65ae0d14457053efb1e354c7e7f7e120d97fad1`; MIT; inspected blocking/staging, lighting/color, production workflow, shot-plan template and evaluation instructions.
+- `0xhughs/director-skills` — commit `35ca0a2b4cd55b0668aa9ea0f40273324b774bb4`; MIT; inspected shotlist/visual-breakdown and identity-anchor mechanisms.
+- `smixs/visual-skills` — commit `92be33a5a73325fb3d8e0c73b22744b114e2a90e`; CC BY 4.0; used only as a cited source for dramaturgy/keyframe concepts. Attribution obligations apply to any future adaptation or redistribution.
+- `zenstory-ai/drama-skills` — commit `66b7b3e9e913fcefe81849941c0761facd5b1d5e`; MIT; inspected storyboard, continuity, evaluation and documented blocking-probe material.
+
+All evidence is static source inspection. No upstream code, skill or evaluation suite was executed by this Hub review; the narrow Seedance probe is reported by its upstream project and was not independently reproduced.
