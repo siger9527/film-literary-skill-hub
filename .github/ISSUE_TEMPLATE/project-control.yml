@@ -1,0 +1,107 @@
+name: Project Control Center
+description: Submit a project issue, improvement, idea, decision request, or evidence-backed review in one place.
+title: "[CONTROL] "
+labels: ["project-control"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this single intake for anything discovered while advancing the project. Do not silently change locked requirements. The maintainer will classify, link, and track the item.
+  - type: dropdown
+    id: record_type
+    attributes:
+      label: Record type
+      description: Choose the primary nature of this entry.
+      options:
+        - Defect / problem
+        - Improvement proposal
+        - New idea / opportunity
+        - Architecture or requirement change request
+        - Risk / security / license concern
+        - Decision request
+        - Verification / evidence report
+        - Research finding
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One concise statement of what was found or proposed.
+      placeholder: Describe the issue, idea, or decision needed.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details and reproduction / rationale
+      description: Include context, steps, expected vs actual behavior, or why the idea matters.
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 - blocks release / data loss / security
+        - P1 - blocks current milestone
+        - P2 - important improvement
+        - P3 - backlog / exploration
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Impact scope
+      options:
+        - Project governance / control center
+        - Resource discovery
+        - Source review / evidence
+        - Classification / 21-node mapping
+        - License / provenance / security
+        - Skill curation / packaging
+        - CI / automation / release
+        - Multiple areas / unknown
+    validations:
+      required: true
+  - type: textarea
+    id: affected_nodes
+    attributes:
+      label: Affected 21-node IDs or components
+      description: Enter node IDs (00-20), paths, workflows, or write "unknown".
+      placeholder: "00, 02, 11; scripts/discover.py"
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and verification
+      description: Link commits, files, logs, screenshots, test output, source URLs, or state what evidence is missing.
+    validations:
+      required: false
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Proposed action and alternatives
+      description: State the recommended fix, alternatives, trade-offs, and rollback considerations.
+    validations:
+      required: false
+  - type: checkboxes
+    id: governance
+    attributes:
+      label: Governance checks
+      options:
+        - label: I have considered whether this conflicts with locked requirements / V0.1.
+          required: false
+        - label: I have distinguished observed facts from assumptions or proposals.
+          required: false
+        - label: I have included evidence or explicitly stated that evidence is not yet available.
+          required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What observable result will prove this item is resolved?
+      placeholder: "Tests pass; output matches schema; evidence link attached."
+    validations:
+      required: true
