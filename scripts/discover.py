@@ -116,6 +116,8 @@ def main():
                 if item.get("type") == "blob" and item["path"].split("/")[-1].lower() == "skill.md"
             ]
             license_status, license_file = license_state(tree)
+            license_text = raw_text(full_name, sha, license_file) if license_file else None
+            license_spdx = detect_spdx(license_text or "")
             for path in skill_paths[:config["max_skill_files_per_repository"]]:
                 body = raw_text(full_name, sha, path)
                 if body is None:
@@ -128,7 +130,8 @@ def main():
                     "repository": full_name, "commit": sha, "path": path, "skill_name": skill_name,
                     "description": description[:500],
                     "source_url": f"https://github.com/{full_name}/blob/{sha}/{path}",
-                    "license_status": license_status, "license_file": license_file,
+                    "license_status": license_status, "license_file": license_file, "license_spdx": license_spdx,
+                    "license_evidence_url": f"https://github.com/{full_name}/blob/{sha}/{license_file}" if license_file else None,
                     "review_status": "DISCOVERED", "source_text_read": bool(body),
                     "categories": classify(skill_name, description, body, categories),
                     "evidence": [f"Repository metadata: https://github.com/{full_name}",
