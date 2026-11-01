@@ -18,7 +18,8 @@ def validate_catalog(path):
     errors = []
     for index, record in enumerate(resources):
         for error in validator.iter_errors(record):
-            errors.append(f"resources[{index}] {".".join(map(str, error.absolute_path))}: {error.message}")
+            location = ".".join(map(str, error.absolute_path))
+            errors.append(f"resources[{index}] {location}: {error.message}")
     if errors:
         raise ValueError("\n".join(errors))
     return len(resources)
