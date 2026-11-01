@@ -164,9 +164,6 @@ def main():
     if errors:
         (output / "errors.json").write_text(json.dumps(errors, ensure_ascii=False, indent=2) + "\n", "utf-8")
         raise RuntimeError(f"Discovery incomplete: {len(errors)} error(s). Existing catalog was not replaced; inspect {output / 'errors.json'}")
-    if errors:
-        (output / "errors.json").write_text(json.dumps(errors, ensure_ascii=False, indent=2) + "\\n", "utf-8")
-        raise RuntimeError(f"Discovery incomplete: {len(errors)} error(s). Existing catalog was not replaced; inspect {output / 'errors.json'}")
     cards.sort(key=lambda item: (item["repository"], item["path"]))
     generated = dt.datetime.now(dt.timezone.utc).isoformat()
     (output / "resources.json").write_text(

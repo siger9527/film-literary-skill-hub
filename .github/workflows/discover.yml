@@ -35,6 +35,8 @@ jobs:
           python scripts/validate_catalog.py resources
           python scripts/review_l1.py
           python scripts/validate_catalog.py l1
+          python scripts/review_l2.py --limit 5 --only-l1-candidates
+          python scripts/validate_catalog.py l2
       - name: Create review pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
