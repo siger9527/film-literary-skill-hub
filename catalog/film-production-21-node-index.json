@@ -111,7 +111,8 @@
       "mission": "设计建筑空间、场景、陈设、道具、材料、色彩及时代地域可信度。",
       "primary_deliverables": "美术概念、场景设计、空间图、材质色彩方案、陈设道具清单和执行图。",
       "knowledge_entry_paths": [
-        "knowledge-base/entries/visual-bible-asset-identity-continuity.md"
+        "knowledge-base/entries/visual-bible-asset-identity-continuity.md",
+        "knowledge-base/entries/production-design-and-visual-development-workflow.md"
       ],
       "status": "PARTIAL_RESEARCH"
     },
@@ -171,7 +172,8 @@
       "mission": "建立跨场景、角色、资产和镜头的风格、造型、色彩、形状、材质和视觉母题。",
       "primary_deliverables": "视觉圣经、风格帧、色彩脚本、角色场景视觉方向和一致性规则。",
       "knowledge_entry_paths": [
-        "knowledge-base/entries/visual-bible-asset-identity-continuity.md"
+        "knowledge-base/entries/visual-bible-asset-identity-continuity.md",
+        "knowledge-base/entries/production-design-and-visual-development-workflow.md"
       ],
       "status": "PARTIAL_RESEARCH"
     },
