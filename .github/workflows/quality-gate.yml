@@ -34,5 +34,7 @@ jobs:
                   json.loads(path.read_text(encoding="utf-8"))
                   print("JSON OK:", path)
           PY
+      - name: Validate canonical five-stage / 21-node taxonomy
+        run: python scripts/validate_taxonomy.py
       - name: Validate tests and resource-card schema
         run: python -m unittest discover -s tests -v
