@@ -1,37 +1,19 @@
 {
-  "schema_version": "1.0.0",
-  "classification_basis": "Film Production 21-node framework V0.1; classification labels only, not a framework revision.",
-  "categories": [
+  "schema_version": "1.1.0",
+  "classification_basis": "Locked Film Production five-stage / 21-node framework V0.1. One category per node; literary and technical cross-cutting domains are tags, not extra production nodes.",
+  "stages": [
     {
-      "id": "literature",
-      "label": "文学创作",
-      "nodes": [],
-      "keywords": [
-        "fiction",
-        "novel",
-        "storytelling",
-        "literature",
-        "worldbuilding"
-      ]
-    },
-    {
-      "id": "screenwriting",
-      "label": "剧本开发",
+      "id": "stage-01",
+      "name": "项目立项与前期开发",
       "nodes": [
+        "00",
         "01",
         "02"
-      ],
-      "keywords": [
-        "screenplay",
-        "screenwriting",
-        "script",
-        "dramaturgy",
-        "story structure"
       ]
     },
     {
-      "id": "directing",
-      "label": "导演与视觉前期",
+      "id": "stage-02",
+      "name": "导演与视觉前期",
       "nodes": [
         "03",
         "04",
@@ -40,72 +22,43 @@
         "07",
         "08",
         "09"
-      ],
-      "keywords": [
-        "directing",
-        "storyboard",
-        "cinematography",
-        "lighting",
-        "blocking",
-        "production design",
-        "visual development"
       ]
     },
     {
-      "id": "asset-production",
-      "label": "资产与镜头制作",
+      "id": "stage-03",
+      "name": "资产与镜头制作",
       "nodes": [
         "10",
         "11",
         "12",
         "13"
-      ],
-      "keywords": [
-        "character design",
-        "asset",
-        "prompt engineering",
-        "video generation",
-        "animation",
-        "vfx"
       ]
     },
     {
-      "id": "post-production",
-      "label": "后期制作",
+      "id": "stage-04",
+      "name": "后期制作",
       "nodes": [
         "14",
         "15",
         "16",
         "17",
         "18"
-      ],
-      "keywords": [
-        "editing",
-        "color grading",
-        "sound design",
-        "music",
-        "subtitle",
-        "media management"
       ]
     },
     {
-      "id": "delivery-qc",
-      "label": "最终交付与质量控制",
+      "id": "stage-05",
+      "name": "最终交付与质量控制",
       "nodes": [
         "19",
         "20"
-      ],
-      "keywords": [
-        "delivery",
-        "quality control",
-        "qc",
-        "mastering",
-        "validation"
       ]
-    },
+    }
+  ],
+  "categories": [
     {
-      "id": "production-management",
-      "label": "项目管理与制片统筹",
+      "id": "node-00",
+      "label": "00 项目管理与制片统筹",
+      "stage_id": "stage-01",
       "nodes": [
         "00"
       ],
@@ -114,8 +67,358 @@
         "producer",
         "project management",
         "scheduling",
-        "budget"
+        "budget",
+        "risk"
       ]
+    },
+    {
+      "id": "node-01",
+      "label": "01 创意开发与故事策划",
+      "stage_id": "stage-01",
+      "nodes": [
+        "01"
+      ],
+      "keywords": [
+        "creative development",
+        "premise",
+        "theme",
+        "story engine",
+        "worldbuilding",
+        "story development"
+      ]
+    },
+    {
+      "id": "node-02",
+      "label": "02 剧本开发与戏剧结构",
+      "stage_id": "stage-01",
+      "nodes": [
+        "02"
+      ],
+      "keywords": [
+        "screenplay",
+        "screenwriting",
+        "script",
+        "dramaturgy",
+        "scene craft",
+        "dialogue"
+      ]
+    },
+    {
+      "id": "node-03",
+      "label": "03 导演与整体视听表达",
+      "stage_id": "stage-02",
+      "nodes": [
+        "03"
+      ],
+      "keywords": [
+        "directing",
+        "director vision",
+        "visual storytelling",
+        "performance direction"
+      ]
+    },
+    {
+      "id": "node-04",
+      "label": "04 制作设计与场景美术",
+      "stage_id": "stage-02",
+      "nodes": [
+        "04"
+      ],
+      "keywords": [
+        "production design",
+        "art direction",
+        "set design",
+        "props",
+        "set dressing",
+        "environment design"
+      ]
+    },
+    {
+      "id": "node-05",
+      "label": "05 分镜与镜头设计",
+      "stage_id": "stage-02",
+      "nodes": [
+        "05"
+      ],
+      "keywords": [
+        "storyboard",
+        "shot list",
+        "animatic",
+        "visual breakdown",
+        "keyframe"
+      ]
+    },
+    {
+      "id": "node-06",
+      "label": "06 摄影指导与镜头语言",
+      "stage_id": "stage-02",
+      "nodes": [
+        "06"
+      ],
+      "keywords": [
+        "cinematography",
+        "camera",
+        "lens",
+        "shot composition",
+        "camera movement"
+      ]
+    },
+    {
+      "id": "node-07",
+      "label": "07 灯光设计与影调控制",
+      "stage_id": "stage-02",
+      "nodes": [
+        "07"
+      ],
+      "keywords": [
+        "lighting",
+        "light design",
+        "exposure",
+        "contrast ratio",
+        "color temperature"
+      ]
+    },
+    {
+      "id": "node-08",
+      "label": "08 场面调度与表演空间设计",
+      "stage_id": "stage-02",
+      "nodes": [
+        "08"
+      ],
+      "keywords": [
+        "blocking",
+        "staging",
+        "actor movement",
+        "screen direction",
+        "eyeline"
+      ]
+    },
+    {
+      "id": "node-09",
+      "label": "09 视觉开发与整体视觉统一",
+      "stage_id": "stage-02",
+      "nodes": [
+        "09"
+      ],
+      "keywords": [
+        "visual development",
+        "visual bible",
+        "style frame",
+        "color script",
+        "visual consistency"
+      ]
+    },
+    {
+      "id": "node-10",
+      "label": "10 角色、场景与道具资产制作",
+      "stage_id": "stage-03",
+      "nodes": [
+        "10"
+      ],
+      "keywords": [
+        "asset production",
+        "character design",
+        "environment asset",
+        "prop asset",
+        "3d asset"
+      ]
+    },
+    {
+      "id": "node-11",
+      "label": "11 视觉执行编译与提示词工程",
+      "stage_id": "stage-03",
+      "nodes": [
+        "11"
+      ],
+      "keywords": [
+        "prompt engineering",
+        "visual compiler",
+        "image generation workflow",
+        "model adapter"
+      ]
+    },
+    {
+      "id": "node-12",
+      "label": "12 视频与动态镜头生成",
+      "stage_id": "stage-03",
+      "nodes": [
+        "12"
+      ],
+      "keywords": [
+        "video generation",
+        "image to video",
+        "text to video",
+        "motion generation"
+      ]
+    },
+    {
+      "id": "node-13",
+      "label": "13 动画、特效与镜头修复",
+      "stage_id": "stage-03",
+      "nodes": [
+        "13"
+      ],
+      "keywords": [
+        "animation",
+        "visual effects",
+        "vfx",
+        "compositing",
+        "rotoscoping",
+        "tracking"
+      ]
+    },
+    {
+      "id": "node-14",
+      "label": "14 媒体管理与素材管理",
+      "stage_id": "stage-04",
+      "nodes": [
+        "14"
+      ],
+      "keywords": [
+        "media management",
+        "media ingest",
+        "metadata",
+        "proxy",
+        "checksum",
+        "backup"
+      ]
+    },
+    {
+      "id": "node-15",
+      "label": "15 剪辑与叙事节奏",
+      "stage_id": "stage-04",
+      "nodes": [
+        "15"
+      ],
+      "keywords": [
+        "editing",
+        "video editing",
+        "timeline",
+        "montage",
+        "rough cut",
+        "fine cut"
+      ]
+    },
+    {
+      "id": "node-16",
+      "label": "16 调色与视觉统一",
+      "stage_id": "stage-04",
+      "nodes": [
+        "16"
+      ],
+      "keywords": [
+        "color grading",
+        "color correction",
+        "color management",
+        "lut"
+      ]
+    },
+    {
+      "id": "node-17",
+      "label": "17 声音设计与音乐制作",
+      "stage_id": "stage-04",
+      "nodes": [
+        "17"
+      ],
+      "keywords": [
+        "sound design",
+        "audio post",
+        "foley",
+        "music composition",
+        "mixing",
+        "dialogue edit"
+      ]
+    },
+    {
+      "id": "node-18",
+      "label": "18 标题、字幕与视觉包装",
+      "stage_id": "stage-04",
+      "nodes": [
+        "18"
+      ],
+      "keywords": [
+        "subtitles",
+        "titles",
+        "motion graphics",
+        "lower thirds",
+        "captioning"
+      ]
+    },
+    {
+      "id": "node-19",
+      "label": "19 最终成片输出与交付",
+      "stage_id": "stage-05",
+      "nodes": [
+        "19"
+      ],
+      "keywords": [
+        "final delivery",
+        "mastering",
+        "encoding",
+        "export",
+        "mezzanine",
+        "delivery package"
+      ]
+    },
+    {
+      "id": "node-20",
+      "label": "20 独立质量审查与最终放行",
+      "stage_id": "stage-05",
+      "nodes": [
+        "20"
+      ],
+      "keywords": [
+        "quality control",
+        "qc",
+        "quality assurance",
+        "technical validation",
+        "final review"
+      ]
+    }
+  ],
+  "cross_cutting_domains": [
+    {
+      "id": "literature",
+      "label": "文学创作与原著资源",
+      "maps_to_nodes": [
+        "01",
+        "02"
+      ],
+      "description": "跨节点知识域，不构成第22个生产节点。"
+    },
+    {
+      "id": "adaptation",
+      "label": "文学影视化改编",
+      "maps_to_nodes": [
+        "01",
+        "02",
+        "03"
+      ],
+      "description": "跨阶段主题域，分别保留故事、剧本和导演责任。"
+    },
+    {
+      "id": "ai-production-tools",
+      "label": "AI影像与生成工具",
+      "maps_to_nodes": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "description": "工具能力标签，不是岗位节点。"
+    },
+    {
+      "id": "rights-and-safety",
+      "label": "版权、授权与安全",
+      "maps_to_nodes": [
+        "00",
+        "10",
+        "14",
+        "17",
+        "19",
+        "20"
+      ],
+      "description": "贯穿生产流程的治理主题。"
     }
   ]
 }
