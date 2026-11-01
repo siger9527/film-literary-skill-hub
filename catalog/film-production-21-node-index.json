@@ -185,7 +185,8 @@
       "mission": "按批准设计制作可复用资产，管理身份、变体、状态、版本和依赖。",
       "primary_deliverables": "角色场景道具资产、变体表、资产清单、身份锚点和验收记录。",
       "knowledge_entry_paths": [
-        "knowledge-base/entries/visual-bible-asset-identity-continuity.md"
+        "knowledge-base/entries/visual-bible-asset-identity-continuity.md",
+        "knowledge-base/entries/asset-visual-execution-video-generation-animation-vfx.md"
       ],
       "status": "PARTIAL_RESEARCH"
     },
@@ -196,7 +197,9 @@
       "stage_id": "stage-03",
       "mission": "将导演与镜头规格编译为模型/工具可执行请求，管理参考、参数和适配。",
       "primary_deliverables": "结构化视觉规格、模型适配Prompt、工作流参数、执行配置和诊断。",
-      "knowledge_entry_paths": [],
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/asset-visual-execution-video-generation-animation-vfx.md"
+      ],
       "status": "PARTIAL_RESEARCH"
     },
     {
@@ -206,7 +209,9 @@
       "stage_id": "stage-03",
       "mission": "按镜头规格生成动态影像，控制动作、时长、运动、身份、空间和起止状态。",
       "primary_deliverables": "视频片段、生成任务记录、模型参数快照、镜头版本和失败记录。",
-      "knowledge_entry_paths": [],
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/asset-visual-execution-video-generation-animation-vfx.md"
+      ],
       "status": "PARTIAL_RESEARCH"
     },
     {
@@ -217,9 +222,10 @@
       "mission": "完成动画、合成、特效、抠像、跟踪、修复和镜头视觉问题处理。",
       "primary_deliverables": "动画片段、特效层、合成工程、修复镜头和技术检查结果。",
       "knowledge_entry_paths": [
-        "knowledge-base/entries/deterministic-media-execution-and-verification.md"
+        "knowledge-base/entries/deterministic-media-execution-and-verification.md",
+        "knowledge-base/entries/asset-visual-execution-video-generation-animation-vfx.md"
       ],
-      "status": "KNOWLEDGE_SEEDED"
+      "status": "PARTIAL_RESEARCH"
     },
     {
       "id": "14",
