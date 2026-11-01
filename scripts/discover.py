@@ -126,7 +126,8 @@ def main():
             license_spdx = detect_spdx(license_text or "")
             for path in skill_paths[:config["max_skill_files_per_repository"]]:
                 body = raw_text(full_name, sha, path)
-                if body is None:
+                source_read_ok = body is not None
+                if not source_read_ok:
                     errors.append({"repository": full_name, "path": path, "error": "Skill file could not be read or exceeded 200 KB"})
                     body = ""
                 frontmatter = parse_frontmatter(body)
@@ -138,7 +139,7 @@ def main():
                     "source_url": f"https://github.com/{full_name}/blob/{sha}/{path}",
                     "license_status": license_status, "license_file": license_file, "license_spdx": license_spdx,
                     "license_evidence_url": f"https://github.com/{full_name}/blob/{sha}/{license_file}" if license_file else None,
-                    "review_status": "DISCOVERED", "source_text_read": bool(body),
+                    "review_status": "DISCOVERED", "source_text_read": source_read_ok,
                     "categories": classify(skill_name, description, body, categories),
                     "evidence": [f"Repository metadata: https://github.com/{full_name}",
                                  f"Commit-pinned Skill file: https://github.com/{full_name}/blob/{sha}/{path}"],
