@@ -83,3 +83,13 @@ Before downstream production:
 ## 8. Limits
 
 The source set supports identity/variant/state separation, continuity locks, reference provenance, visual thesis and style consistency. It does not fully establish the complete responsibilities, drawing/document standards, art department breakdown, set-construction methods, materials specification or professional visual-development approval process for node 04 and node 09. Those require further specialist research.
+
+## Source provenance
+
+- `cajias/agentic-video-skills` — commit `204cefd08bbb87fd4681f1f2b0dccbc444a978c1`; MIT; inspected continuity-bible and cinematic-director material.
+- `wuwangzhang1216/DirectorSKILL` — commit `c65ae0d14457053efb1e354c7e7f7e120d97fad1`; MIT; inspected shot-plan, production workflow and visual-direction references.
+- `0xhughs/director-skills` — commit `35ca0a2b4cd55b0668aa9ea0f40273324b774bb4`; MIT; inspected character/location/prop bible and identity-anchor references.
+- `zenstory-ai/drama-skills` — commit `66b7b3e9e913fcefe81849941c0761facd5b1d5e`; MIT; inspected character consistency, storyboard and documented blocking-probe material.
+- `smixs/visual-skills` — commit `92be33a5a73325fb3d8e0c73b22744b114e2a90e`; CC BY 4.0; supplementary visual-language source; attribution obligations apply to any future adaptation or redistribution.
+
+All evidence is static source inspection. No upstream code, Skill or evaluation suite was executed by this Hub review.
