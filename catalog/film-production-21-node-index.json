@@ -1,0 +1,299 @@
+{
+  "framework": "Film Production",
+  "framework_version": "V0.1",
+  "stages": [
+    {
+      "id": "stage-01",
+      "name": "项目立项与前期开发",
+      "nodes": [
+        "00",
+        "01",
+        "02"
+      ]
+    },
+    {
+      "id": "stage-02",
+      "name": "导演与视觉前期",
+      "nodes": [
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09"
+      ]
+    },
+    {
+      "id": "stage-03",
+      "name": "资产与镜头制作",
+      "nodes": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ]
+    },
+    {
+      "id": "stage-04",
+      "name": "后期制作",
+      "nodes": [
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "id": "stage-05",
+      "name": "最终交付与质量控制",
+      "nodes": [
+        "19",
+        "20"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "00",
+      "name": "项目管理与制片统筹",
+      "english_name": "Project Management",
+      "stage_id": "stage-01",
+      "mission": "项目管理、预算、资源、进度、风险、组织协作、变更控制与阶段门禁。",
+      "primary_deliverables": "项目章程、制作计划、预算资源表、风险台账、任务依赖、决策和阶段审查记录。",
+      "knowledge_entry_paths": [],
+      "status": "NOT_YET_RESEARCHED"
+    },
+    {
+      "id": "01",
+      "name": "创意开发与故事策划",
+      "english_name": "Creative Development",
+      "stage_id": "stage-01",
+      "mission": "Premise、主题、世界观、人物行动系统、冲突网络和故事引擎的开发与评估。",
+      "primary_deliverables": "创意简报、故事概念、世界观、人物关系、故事大纲和可行性评估。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/story-development-and-screenplay-workflow.md",
+        "knowledge-base/entries/long-form-novel-adaptation-and-production-bible.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "02",
+      "name": "剧本开发与戏剧结构",
+      "english_name": "Screenwriting",
+      "stage_id": "stage-01",
+      "mission": "将故事设计转化为可读、可演、可拍的结构、场景、动作、对白和修订稿。",
+      "primary_deliverables": "结构方案、分场表、剧本各稿、场景分析、修订记录和剧本交付包。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/story-development-and-screenplay-workflow.md",
+        "knowledge-base/entries/long-form-novel-adaptation-and-production-bible.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "03",
+      "name": "导演与整体视听表达",
+      "english_name": "Directing",
+      "stage_id": "stage-02",
+      "mission": "确立导演阐释、叙事视角、表演方向、情绪节奏和整体视听策略。",
+      "primary_deliverables": "导演阐述、视听概念、场景导演分析、表演方向和导演工作本。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/directors-visual-thesis-blocking-shot-design.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "04",
+      "name": "制作设计与场景美术",
+      "english_name": "Production Design",
+      "stage_id": "stage-02",
+      "mission": "设计建筑空间、场景、陈设、道具、材料、色彩及时代地域可信度。",
+      "primary_deliverables": "美术概念、场景设计、空间图、材质色彩方案、陈设道具清单和执行图。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/visual-bible-asset-identity-continuity.md"
+      ],
+      "status": "PARTIAL_RESEARCH"
+    },
+    {
+      "id": "05",
+      "name": "分镜与镜头设计",
+      "english_name": "Storyboard",
+      "stage_id": "stage-02",
+      "mission": "把导演意图转化为镜头序列，明确画面信息、动作阶段、衔接和节奏。",
+      "primary_deliverables": "分镜、镜头清单、镜头卡、动态分镜/Animatic和连续性标注。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/directors-visual-thesis-blocking-shot-design.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "06",
+      "name": "摄影指导与镜头语言",
+      "english_name": "Cinematography",
+      "stage_id": "stage-02",
+      "mission": "设计机位、焦段、景别、角度、运动、曝光和画面组织。",
+      "primary_deliverables": "摄影阐述、镜头规格、机位图、镜头测试、摄影参数和连续性方案。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/directors-visual-thesis-blocking-shot-design.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "07",
+      "name": "灯光设计与影调控制",
+      "english_name": "Lighting",
+      "stage_id": "stage-02",
+      "mission": "设计光源动机、方向、质量、反差、色温、明暗层次和镜头间连续性。",
+      "primary_deliverables": "灯光方案、光源动机图、布光图、影调参考和光线连续性记录。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/directors-visual-thesis-blocking-shot-design.md"
+      ],
+      "status": "PARTIAL_RESEARCH"
+    },
+    {
+      "id": "08",
+      "name": "场面调度与表演空间设计",
+      "english_name": "Blocking & Staging",
+      "stage_id": "stage-02",
+      "mission": "设计人物和道具在空间中的位置、路径、动作、距离、视线和权力关系。",
+      "primary_deliverables": "调度图、人物走位、动作节拍、视线轴线方案和场景空间锚点。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/directors-visual-thesis-blocking-shot-design.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "09",
+      "name": "视觉开发与整体视觉统一",
+      "english_name": "Visual Development",
+      "stage_id": "stage-02",
+      "mission": "建立跨场景、角色、资产和镜头的风格、造型、色彩、形状、材质和视觉母题。",
+      "primary_deliverables": "视觉圣经、风格帧、色彩脚本、角色场景视觉方向和一致性规则。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/visual-bible-asset-identity-continuity.md"
+      ],
+      "status": "PARTIAL_RESEARCH"
+    },
+    {
+      "id": "10",
+      "name": "角色、场景与道具资产制作",
+      "english_name": "Asset Production",
+      "stage_id": "stage-03",
+      "mission": "按批准设计制作可复用资产，管理身份、变体、状态、版本和依赖。",
+      "primary_deliverables": "角色场景道具资产、变体表、资产清单、身份锚点和验收记录。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/visual-bible-asset-identity-continuity.md"
+      ],
+      "status": "PARTIAL_RESEARCH"
+    },
+    {
+      "id": "11",
+      "name": "视觉执行编译与提示词工程",
+      "english_name": "Visual Execution & Prompt Engineering",
+      "stage_id": "stage-03",
+      "mission": "将导演与镜头规格编译为模型/工具可执行请求，管理参考、参数和适配。",
+      "primary_deliverables": "结构化视觉规格、模型适配Prompt、工作流参数、执行配置和诊断。",
+      "knowledge_entry_paths": [],
+      "status": "PARTIAL_RESEARCH"
+    },
+    {
+      "id": "12",
+      "name": "视频与动态镜头生成",
+      "english_name": "Video Generation",
+      "stage_id": "stage-03",
+      "mission": "按镜头规格生成动态影像，控制动作、时长、运动、身份、空间和起止状态。",
+      "primary_deliverables": "视频片段、生成任务记录、模型参数快照、镜头版本和失败记录。",
+      "knowledge_entry_paths": [],
+      "status": "PARTIAL_RESEARCH"
+    },
+    {
+      "id": "13",
+      "name": "动画、特效与镜头修复",
+      "english_name": "Animation & VFX",
+      "stage_id": "stage-03",
+      "mission": "完成动画、合成、特效、抠像、跟踪、修复和镜头视觉问题处理。",
+      "primary_deliverables": "动画片段、特效层、合成工程、修复镜头和技术检查结果。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/deterministic-media-execution-and-verification.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "14",
+      "name": "媒体管理与素材管理",
+      "english_name": "Media Management",
+      "stage_id": "stage-04",
+      "mission": "管理媒体导入、校验、命名、元数据、代理、存储、备份和版本。",
+      "primary_deliverables": "媒体清单、哈希校验、元数据、代理文件、备份恢复记录。",
+      "knowledge_entry_paths": [],
+      "status": "NOT_YET_RESEARCHED"
+    },
+    {
+      "id": "15",
+      "name": "剪辑与叙事节奏",
+      "english_name": "Editing",
+      "stage_id": "stage-04",
+      "mission": "组织镜头、表演、声音和时间，形成连贯的叙事结构、节奏、视点和情绪。",
+      "primary_deliverables": "剪辑时间线、粗剪精剪、剪辑决策、锁画版本、EDL/OTIO和审片记录。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/deterministic-media-execution-and-verification.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "16",
+      "name": "调色与视觉统一",
+      "english_name": "Color Grading",
+      "stage_id": "stage-04",
+      "mission": "完成色彩管理、校正、镜头匹配、风格化调色和交付色彩空间控制。",
+      "primary_deliverables": "色彩管理方案、调色工程、参考帧、镜头匹配记录和技术报告。",
+      "knowledge_entry_paths": [],
+      "status": "NOT_YET_RESEARCHED"
+    },
+    {
+      "id": "17",
+      "name": "声音设计与音乐制作",
+      "english_name": "Sound & Music",
+      "stage_id": "stage-04",
+      "mission": "设计对白、环境声、拟音、音效、音乐、空间声场和混音。",
+      "primary_deliverables": "对白编辑、音效、音乐、分轨、混音母版、响度报告和授权记录。",
+      "knowledge_entry_paths": [],
+      "status": "NOT_YET_RESEARCHED"
+    },
+    {
+      "id": "18",
+      "name": "标题、字幕与视觉包装",
+      "english_name": "Titles & Subtitles",
+      "stage_id": "stage-04",
+      "mission": "设计片头片尾、字幕、图形包装和平台适配图文。",
+      "primary_deliverables": "标题设计、字幕文件、片尾字幕、图形模板和语言版本。",
+      "knowledge_entry_paths": [],
+      "status": "NOT_YET_RESEARCHED"
+    },
+    {
+      "id": "19",
+      "name": "最终成片输出与交付",
+      "english_name": "Final Delivery",
+      "stage_id": "stage-05",
+      "mission": "按发行规范完成编码、封装、母版、命名、元数据和交付包。",
+      "primary_deliverables": "最终母版、平台版本、音视频分轨、字幕、校验和及技术报告。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/deterministic-media-execution-and-verification.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    },
+    {
+      "id": "20",
+      "name": "独立质量审查与最终放行",
+      "english_name": "Quality Control",
+      "stage_id": "stage-05",
+      "mission": "独立检查叙事、视听、连续性、技术、字幕、授权和交付完整性。",
+      "primary_deliverables": "QC报告、缺陷清单、时间码证据、复验记录和最终放行记录。",
+      "knowledge_entry_paths": [
+        "knowledge-base/entries/deterministic-media-execution-and-verification.md"
+      ],
+      "status": "KNOWLEDGE_SEEDED"
+    }
+  ]
+}
