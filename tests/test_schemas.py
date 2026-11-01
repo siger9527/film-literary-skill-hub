@@ -2,6 +2,7 @@ import json
 import unittest
 from pathlib import Path
 from jsonschema import Draft202012Validator
+import yaml
 
 ROOT = Path(__file__).parents[1]
 
@@ -29,6 +30,14 @@ class ResourceSchemaTests(unittest.TestCase):
             "evidence": ["commit-pinned source"],
             "discovered_at": "2026-11-01T00:00:00+00:00"
         }
+
+    def test_workflow_and_issue_form_yaml_parse(self):
+        for path in [ROOT / ".github" / "workflows" / "discover.yml",
+                     ROOT / ".github" / "workflows" / "quality-gate.yml",
+                     ROOT / ".github" / "ISSUE_TEMPLATE" / "project-control.yml"]:
+            with self.subTest(path=str(path)):
+                parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
+                self.assertIsInstance(parsed, dict)
 
     def test_valid_card(self):
         self.assertTrue(self.validator.is_valid(self.valid_card()))
