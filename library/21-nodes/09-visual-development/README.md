@@ -30,3 +30,9 @@
 ## 当前缺口与后续研究
 
 已有部分相关研究或邻接机制，但专业覆盖不完整。后续优先补齐真实工作方法、交付物规范、验收标准和失败诊断。
+
+## 新增专业研究条目
+
+- [Production Design and Visual Development Workflow](../../../knowledge-base/entries/production-design-and-visual-development-workflow.md) — 区分节点04与09的专业责任、从剧本拆解到设计执行的工作流程、交付物验收、跨部门接口与失败返工路径。
+
+该条目属于跨来源专业岗位研究与流程综合，不代表AI生产流水线已运行验证；节点状态仍为 PARTIAL_RESEARCH。
