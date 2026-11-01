@@ -14,6 +14,12 @@ API = "https://api.github.com"
 UA = "film-literary-skill-hub/0.1"
 MAX_FILE_BYTES = 200_000
 MAX_FILES_PER_REPOSITORY = 120
+
+class ReviewBlocked(RuntimeError):
+    def __init__(self, message, tree_truncated=False):
+        super().__init__(message)
+        self.tree_truncated = tree_truncated
+MAX_FILES_PER_REPOSITORY = 120
 TEXT_SUFFIXES = {".py", ".js", ".ts", ".tsx", ".jsx", ".sh", ".yml", ".yaml", ".json", ".toml", ".md", ".txt", ".ps1", ".bat"}
 
 def api_json(url):
@@ -69,7 +75,7 @@ def review_resource(card, today=None):
     repo, commit = card["repository"], card["commit"]
     tree_data = api_json(f"{API}/repos/{repo}/git/trees/{commit}?recursive=1")
     if tree_data.get("truncated"):
-        raise RuntimeError("recursive Git tree truncated; L2 review blocked")
+        raise ReviewBlocked("recursive Git tree truncated; L2 review blocked", tree_truncated=True)
     entries = [x for x in tree_data.get("tree",[]) if x.get("type") == "blob"]
     selected = []
     for entry in entries:
@@ -134,7 +140,8 @@ def main():
         except Exception as exc:
             results.append({
                 "repository":card["repository"],"commit":card["commit"],"skill_path":card["path"],
-                "review_level":"L2","disposition":"BLOCKED","tree_truncated":False,
+                "review_level":"L2","disposition":"BLOCKED",
+                "tree_truncated":bool(getattr(exc,"tree_truncated",False)),
                 "files_indexed":0,"files_selected":0,"files_read":0,"file_kind_counts":{},
                 "file_evidence":[],"mechanism_findings":[],
                 "review_errors":[{"path":"__repository__","error":str(exc)}],
