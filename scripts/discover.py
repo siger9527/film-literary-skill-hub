@@ -129,6 +129,7 @@ def main():
             license_status, license_file = license_state(tree)
             license_text = raw_text(full_name, sha, license_file) if license_file else None
             license_spdx = detect_spdx(license_text or "")
+            readme_present = any(item.get("type") == "blob" and item["path"].split("/")[-1].lower() in ("readme", "readme.md", "readme.rst", "readme.txt") for item in tree.get("tree", []))
             for path in skill_paths[:config["max_skill_files_per_repository"]]:
                 body = raw_text(full_name, sha, path)
                 source_read_ok = body is not None
@@ -143,6 +144,13 @@ def main():
                     "description": description[:500],
                     "source_url": f"https://github.com/{full_name}/blob/{sha}/{path}",
                     "license_status": license_status, "license_file": license_file, "license_spdx": license_spdx,
+                    "repository_description": metadata.get("description") or "",
+                    "repository_archived": bool(metadata.get("archived", False)),
+                    "repository_pushed_at": metadata.get("pushed_at"),
+                    "repository_stars": metadata.get("stargazers_count", 0),
+                    "readme_present": readme_present,
+                    "frontmatter_name_present": bool(frontmatter.get("name")),
+                    "frontmatter_description_present": bool(frontmatter.get("description")),
                     "license_evidence_url": f"https://github.com/{full_name}/blob/{sha}/{license_file}" if license_file else None,
                     "review_status": "DISCOVERED", "source_text_read": source_read_ok,
                     "categories": classify(skill_name, description, body, categories),

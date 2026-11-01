@@ -39,6 +39,20 @@ class ResourceSchemaTests(unittest.TestCase):
                 parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
                 self.assertIsInstance(parsed, dict)
 
+    def test_l1_review_schema_accepts_and_rejects_records(self):
+        schema = json.loads((ROOT / "schemas" / "l1-review.schema.json").read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(schema)
+        validator = Draft202012Validator(schema)
+        record = {
+            "repository": "owner/repo", "commit": "0123456789abcdef0123456789abcdef01234567",
+            "path": "skills/demo/SKILL.md", "metadata_completeness_score": 90,
+            "disposition": "L1_CANDIDATE", "flags": [], "review_level": "L1",
+            "limitations": ["Not a runtime test."]
+        }
+        self.assertTrue(validator.is_valid(record))
+        record["metadata_completeness_score"] = 101
+        self.assertFalse(validator.is_valid(record))
+
     def test_valid_card(self):
         self.assertTrue(self.validator.is_valid(self.valid_card()))
 

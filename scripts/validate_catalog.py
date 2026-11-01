@@ -1,29 +1,41 @@
 #!/usr/bin/env python3
-"""Validate generated catalog records against the committed resource-card schema."""
+"""Validate generated discovery and L1 review artifacts against committed schemas."""
+import argparse
 import json
-import sys
 from pathlib import Path
 from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 
-def validate_catalog(path):
-    schema = json.loads((ROOT / "schemas" / "resource-card.schema.json").read_text(encoding="utf-8"))
+def validate(path, schema_path, collection_key, count_key):
+    schema = json.loads((ROOT / schema_path).read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
     validator = Draft202012Validator(schema)
     payload = json.loads(Path(path).read_text(encoding="utf-8"))
-    resources = payload.get("resources")
-    if not isinstance(resources, list):
-        raise ValueError("catalog payload must contain a resources array")
+    records = payload.get(collection_key)
+    if not isinstance(records, list):
+        raise ValueError(f"artifact must contain a {collection_key} array")
     errors = []
-    for index, record in enumerate(resources):
+    for index, record in enumerate(records):
         for error in validator.iter_errors(record):
             location = ".".join(map(str, error.absolute_path))
-            errors.append(f"resources[{index}] {location}: {error.message}")
+            errors.append(f"{collection_key}[{index}] {location}: {error.message}")
     if errors:
         raise ValueError("\n".join(errors))
-    return len(resources)
+    if count_key in payload and payload[count_key] != len(records):
+        raise ValueError(f"{count_key} does not match {collection_key} length")
+    return len(records)
 
 if __name__ == "__main__":
-    target = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "catalog" / "generated" / "resources.json"
-    print(f"Validated {validate_catalog(target)} resource cards against resource-card.schema.json")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("kind", choices=["resources", "l1"])
+    parser.add_argument("--input")
+    args = parser.parse_args()
+    if args.kind == "resources":
+        path = args.input or str(ROOT / "catalog" / "generated" / "resources.json")
+        count = validate(path, "schemas/resource-card.schema.json", "resources", "count")
+        print(f"Validated {count} resource cards.")
+    else:
+        path = args.input or str(ROOT / "catalog" / "generated" / "l1-reviews.json")
+        count = validate(path, "schemas/l1-review.schema.json", "reviews", "count")
+        print(f"Validated {count} L1 review records.")

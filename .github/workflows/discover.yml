@@ -32,7 +32,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/discover.py --limit "${{ inputs.limit || '15' }}"
-          python scripts/validate_catalog.py
+          python scripts/validate_catalog.py resources
+          python scripts/review_l1.py
+          python scripts/validate_catalog.py l1
       - name: Create review pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "L1 Metadata Review",
+  "type": "object",
+  "required": [
+    "repository",
+    "commit",
+    "path",
+    "metadata_completeness_score",
+    "disposition",
+    "flags",
+    "review_level",
+    "limitations"
+  ],
+  "properties": {
+    "repository": {
+      "type": "string",
+      "pattern": "^[^/]+/[^/]+$"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metadata_completeness_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "disposition": {
+      "enum": [
+        "BLOCKED",
+        "MANUAL_REVIEW_REQUIRED",
+        "L1_CANDIDATE",
+        "OBSERVE"
+      ]
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "review_level": {
+      "const": "L1"
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
