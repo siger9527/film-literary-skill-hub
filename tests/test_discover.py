@@ -19,7 +19,9 @@ class DiscoveryTests(unittest.TestCase):
 
     def test_classification(self):
         cats = json.loads((ROOT / "config" / "categories.json").read_text())
-        self.assertIn("directing", mod.classify("Storyboard Builder", "Create cinematic storyboards", "shot composition", cats))
+        self.assertIn("node-05", mod.classify("Storyboard Builder", "Create cinematic storyboards", "shot composition", cats))
+        self.assertNotIn("literature", [item["id"] for item in cats["categories"]])
+        self.assertEqual(len(cats["categories"]), 21)
 
     def test_spdx_detection(self):
         self.assertEqual(mod.detect_spdx("/* SPDX-License-Identifier: MIT */\n"), "MIT")
