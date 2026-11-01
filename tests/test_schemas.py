@@ -59,6 +59,21 @@ class ResourceSchemaTests(unittest.TestCase):
         record["runtime_tested"] = True
         self.assertFalse(validator.is_valid(record))
 
+    def test_l2_schema_accepts_blocked_truncated_tree_record(self):
+        schema = json.loads((ROOT / "schemas" / "l2-review.schema.json").read_text(encoding="utf-8"))
+        validator = Draft202012Validator(schema)
+        record = {
+            "repository": "owner/repo", "commit": "0123456789abcdef0123456789abcdef01234567",
+            "skill_path": "SKILL.md", "review_level": "L2", "disposition": "BLOCKED",
+            "tree_truncated": True, "files_indexed": 0, "files_selected": 0, "files_read": 0,
+            "file_kind_counts": {}, "file_evidence": [], "mechanism_findings": [],
+            "review_errors": [{"path": "__repository__", "error": "tree truncated"}],
+            "capability_claims_not_runtime_verified": True, "runtime_tested": False,
+            "source_code_executed": False, "limitations": ["Blocked before inspection."],
+            "reviewed_at": "2026-11-01T00:00:00Z"
+        }
+        self.assertTrue(validator.is_valid(record))
+
     def test_l1_review_schema_accepts_and_rejects_records(self):
         schema = json.loads((ROOT / "schemas" / "l1-review.schema.json").read_text(encoding="utf-8"))
         Draft202012Validator.check_schema(schema)
