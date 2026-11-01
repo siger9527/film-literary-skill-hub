@@ -78,6 +78,19 @@
     "discovered_at": {
       "type": "string",
       "format": "date-time"
+    },
+    "license_spdx": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license_evidence_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
     }
   },
   "additionalProperties": false
