@@ -1,0 +1,46 @@
+name: Discover and catalog Skills
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Maximum repositories per query
+        required: false
+        default: "15"
+  schedule:
+    - cron: "23 3 * * 1"
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: skill-hub-discovery
+  cancel-in-progress: false
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Discover public repositories and Skills
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/discover.py --limit "${{ inputs.limit || '15' }}"
+      - name: Create review pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git checkout -B bot/discovery-update
+            git add catalog/generated
+            git commit -m "chore(catalog): refresh discovered Skill resources"
+            git push --force-with-lease origin bot/discovery-update
+            gh pr create --title "chore(catalog): refresh discovered Skill resources" --body "Automated discovery update. Review source pins, categories, and license evidence before merging." --base main --head bot/discovery-update || true
+          else
+            echo "No catalog changes."
+          fi
