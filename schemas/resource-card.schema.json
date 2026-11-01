@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill Hub Resource Card",
+  "type": "object",
+  "required": [
+    "repository",
+    "commit",
+    "path",
+    "skill_name",
+    "source_url",
+    "license_status",
+    "review_status",
+    "categories"
+  ],
+  "properties": {
+    "repository": {
+      "type": "string",
+      "pattern": "^[^/]+/[^/]+$"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "path": {
+      "type": "string"
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "license_status": {
+      "enum": [
+        "LICENSED_REVIEW_REQUIRED",
+        "LICENSED_REUSE_ALLOWED_SUBJECT_TO_TERMS",
+        "NO_LICENSE_FOUND",
+        "LICENSE_SCOPE_UNCLEAR",
+        "PROPRIETARY_OR_RESTRICTED",
+        "REJECTED"
+      ]
+    },
+    "license_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "DISCOVERED",
+        "REVIEWED_L1",
+        "REVIEWED_L2",
+        "REVIEWED_L3",
+        "RUNTIME_TESTED",
+        "INTEGRATED",
+        "REJECTED"
+      ]
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "discovered_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "license_spdx": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license_evidence_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    }
+  },
+  "additionalProperties": false
+}

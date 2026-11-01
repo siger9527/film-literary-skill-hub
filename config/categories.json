@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0.0",
+  "classification_basis": "Film Production 21-node framework V0.1; classification labels only, not a framework revision.",
+  "categories": [
+    {
+      "id": "literature",
+      "label": "文学创作",
+      "nodes": [],
+      "keywords": [
+        "fiction",
+        "novel",
+        "storytelling",
+        "literature",
+        "worldbuilding"
+      ]
+    },
+    {
+      "id": "screenwriting",
+      "label": "剧本开发",
+      "nodes": [
+        "01",
+        "02"
+      ],
+      "keywords": [
+        "screenplay",
+        "screenwriting",
+        "script",
+        "dramaturgy",
+        "story structure"
+      ]
+    },
+    {
+      "id": "directing",
+      "label": "导演与视觉前期",
+      "nodes": [
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09"
+      ],
+      "keywords": [
+        "directing",
+        "storyboard",
+        "cinematography",
+        "lighting",
+        "blocking",
+        "production design",
+        "visual development"
+      ]
+    },
+    {
+      "id": "asset-production",
+      "label": "资产与镜头制作",
+      "nodes": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "keywords": [
+        "character design",
+        "asset",
+        "prompt engineering",
+        "video generation",
+        "animation",
+        "vfx"
+      ]
+    },
+    {
+      "id": "post-production",
+      "label": "后期制作",
+      "nodes": [
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "keywords": [
+        "editing",
+        "color grading",
+        "sound design",
+        "music",
+        "subtitle",
+        "media management"
+      ]
+    },
+    {
+      "id": "delivery-qc",
+      "label": "最终交付与质量控制",
+      "nodes": [
+        "19",
+        "20"
+      ],
+      "keywords": [
+        "delivery",
+        "quality control",
+        "qc",
+        "mastering",
+        "validation"
+      ]
+    },
+    {
+      "id": "production-management",
+      "label": "项目管理与制片统筹",
+      "nodes": [
+        "00"
+      ],
+      "keywords": [
+        "production management",
+        "producer",
+        "project management",
+        "scheduling",
+        "budget"
+      ]
+    }
+  ]
+}

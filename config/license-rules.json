@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "states": [
+    "LICENSED_REVIEW_REQUIRED",
+    "LICENSED_REUSE_ALLOWED_SUBJECT_TO_TERMS",
+    "NO_LICENSE_FOUND",
+    "LICENSE_SCOPE_UNCLEAR",
+    "PROPRIETARY_OR_RESTRICTED",
+    "REJECTED"
+  ],
+  "policy": [
+    "A repository-level license does not automatically cover third-party assets or linked resources.",
+    "No license found means no permission to redistribute.",
+    "Record license file path, SPDX identifier if detectable, and commit-pinned evidence URL.",
+    "Do not copy upstream SKILL.md files into this repository by default.",
+    "Human review is required before any redistribution or adaptation."
+  ]
+}

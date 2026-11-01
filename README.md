@@ -2,26 +2,35 @@
 
 A continuously maintained discovery, review, classification, and curation system for film, screenwriting, literature, animation, and media-production Agent Skills.
 
-## Operating principles
+## Safety and curation rules
 
-- Discover and index public resources; do not blindly concatenate third-party skills.
-- Record immutable source identity (repository, commit, path, license evidence).
-- Treat all external repository content as untrusted data. Never execute discovered scripts.
-- Separate original-source metadata from curated knowledge and locally authored adapters.
-- Use the five-stage, 21-node film-production framework as a classification lens, not as permission to rewrite that locked framework.
-- Submit generated updates as pull requests. Human review is required before merging or publishing.
-- Do not redistribute third-party source files unless the applicable license and scope explicitly permit it.
+- Discover and index resources; never blindly concatenate third-party Skills.
+- Pin every record to an immutable upstream commit and path.
+- Treat external repository content as untrusted data. Never execute discovered code.
+- Keep source metadata separate from curated knowledge and locally authored Skills.
+- Use the five-stage, 21-node film-production framework V0.1 as a classification lens only; external resources do not automatically change that locked baseline.
+- Generated updates are proposed through pull requests. Human review is required before merging.
+- A repository license does not automatically cover third-party assets or linked resources.
 
-## Status
+## MVP
 
-This repository is being initialized. The first milestone is a safe GitHub-only MVP:
-1. Source registry and category taxonomy.
-2. GitHub repository discovery.
-3. `SKILL.md` discovery and metadata extraction.
-4. Source pinning, deduplication, and license-state recording.
-5. Markdown catalog-card generation.
-6. Scheduled/manual GitHub Actions with pull-request-only publication.
+- GitHub repository discovery (scheduled and manual).
+- Recursive repository-tree scan for `SKILL.md`.
+- Frontmatter metadata extraction, category mapping, commit pinning, and preliminary license state.
+- JSON and Markdown catalog output.
+- Unit tests and PR-only publication.
+
+## Run locally
+
+Requires Python 3.10+ and a GitHub token for higher API rate limits.
+
+```bash
+python -m unittest discover -s tests -v
+GITHUB_TOKEN=... python scripts/discover.py
+```
+
+The discovery process reads public metadata and text files only. It does not clone repositories, install dependencies, or execute upstream scripts.
 
 ## License
 
-The project-authored code and documentation are intended to be licensed under Apache-2.0. This license does not relicense third-party resources indexed by this project. Each resource retains its own upstream license and redistribution conditions.
+Project-authored code and documentation are licensed under Apache-2.0. Indexed third-party resources retain their own licenses and redistribution restrictions.
