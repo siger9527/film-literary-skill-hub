@@ -85,11 +85,16 @@ def classify(name, description, content, categories):
 
 def discover_repositories(config, limit):
     found = {}
+    errors = []
     for query in config["queries"]:
         url = API + "/search/repositories?" + urllib.parse.urlencode({
             "q": query + " fork:false", "sort": "updated", "order": "desc", "per_page": min(limit, 30)
         })
-        data = request_json(url)
+        try:
+            data = request_json(url)
+        except Exception as exc:
+            errors.append({"query": query, "error": str(exc)})
+            continue
         for item in data.get("items", []):
             found[item["full_name"]] = item
         time.sleep(1)
@@ -97,8 +102,8 @@ def discover_repositories(config, limit):
         try:
             found[name] = get_repo(name)
         except Exception as exc:
-            print(f"seed skipped {name}: {exc}", file=sys.stderr)
-    return found
+            errors.append({"repository": name, "error": str(exc)})
+    return found, errors
 
 def main():
     parser = argparse.ArgumentParser()
@@ -107,10 +112,10 @@ def main():
     args = parser.parse_args()
     config = json.loads((ROOT / "config/sources.json").read_text("utf-8"))
     categories = json.loads((ROOT / "config/categories.json").read_text("utf-8"))
-    repositories = discover_repositories(config, args.limit or config["max_repositories_per_query"])
+    repositories, discovery_errors = discover_repositories(config, args.limit or config["max_repositories_per_query"])
     output = ROOT / args.output
     output.mkdir(parents=True, exist_ok=True)
-    cards, errors = [], []
+    cards, errors = [], list(discovery_errors)
     for full_name, metadata in sorted(repositories.items()):
         try:
             branch_name = metadata["default_branch"]
@@ -126,7 +131,8 @@ def main():
             license_spdx = detect_spdx(license_text or "")
             for path in skill_paths[:config["max_skill_files_per_repository"]]:
                 body = raw_text(full_name, sha, path)
-                if body is None:
+                source_read_ok = body is not None
+                if not source_read_ok:
                     errors.append({"repository": full_name, "path": path, "error": "Skill file could not be read or exceeded 200 KB"})
                     body = ""
                 frontmatter = parse_frontmatter(body)
@@ -138,7 +144,7 @@ def main():
                     "source_url": f"https://github.com/{full_name}/blob/{sha}/{path}",
                     "license_status": license_status, "license_file": license_file, "license_spdx": license_spdx,
                     "license_evidence_url": f"https://github.com/{full_name}/blob/{sha}/{license_file}" if license_file else None,
-                    "review_status": "DISCOVERED", "source_text_read": bool(body),
+                    "review_status": "DISCOVERED", "source_text_read": source_read_ok,
                     "categories": classify(skill_name, description, body, categories),
                     "evidence": [f"Repository metadata: https://github.com/{full_name}",
                                  f"Commit-pinned Skill file: https://github.com/{full_name}/blob/{sha}/{path}"],
@@ -147,6 +153,12 @@ def main():
             time.sleep(0.5)
         except Exception as exc:
             errors.append({"repository": full_name, "error": str(exc)})
+    if errors:
+        (output / "errors.json").write_text(json.dumps(errors, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        raise RuntimeError(f"Discovery incomplete: {len(errors)} error(s). Existing catalog was not replaced; inspect {output / 'errors.json'}")
+    if errors:
+        (output / "errors.json").write_text(json.dumps(errors, ensure_ascii=False, indent=2) + "\\n", "utf-8")
+        raise RuntimeError(f"Discovery incomplete: {len(errors)} error(s). Existing catalog was not replaced; inspect {output / 'errors.json'}")
     cards.sort(key=lambda item: (item["repository"], item["path"]))
     generated = dt.datetime.now(dt.timezone.utc).isoformat()
     (output / "resources.json").write_text(
