@@ -68,6 +68,12 @@ def license_state(tree):
         return "LICENSE_SCOPE_UNCLEAR", sorted(candidates)[0]
     return "NO_LICENSE_FOUND", None
 
+def detect_spdx(text):
+    if not text:
+        return None
+    match = re.search(r"SPDX-License-Identifier:\\s*([^\\r\\n*]+)", text, re.IGNORECASE)
+    return match.group(1).strip() if match else None
+
 def classify(name, description, content, categories):
     haystack = (name + " " + description + " " + content[:5000]).lower()
     ranked = []
