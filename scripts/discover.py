@@ -71,7 +71,7 @@ def license_state(tree):
 def detect_spdx(text):
     if not text:
         return None
-    match = re.search(r"SPDX-License-Identifier:\\s*([^\\r\\n*]+)", text, re.IGNORECASE)
+    match = re.search(r"SPDX-License-Identifier:\s*([^\r\n*]+)", text, re.IGNORECASE)
     return match.group(1).strip() if match else None
 
 def classify(name, description, content, categories):
