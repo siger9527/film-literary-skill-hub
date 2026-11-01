@@ -10,7 +10,8 @@
     "source_url",
     "license_status",
     "review_status",
-    "categories"
+    "categories",
+    "source_text_read"
   ],
   "properties": {
     "repository": {
@@ -91,6 +92,10 @@
         "null"
       ],
       "format": "uri"
+    },
+    "source_text_read": {
+      "type": "boolean",
+      "description": "Whether the pinned SKILL.md content was successfully fetched within the configured size limit."
     }
   },
   "additionalProperties": false
