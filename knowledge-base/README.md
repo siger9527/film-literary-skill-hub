@@ -19,6 +19,8 @@ Every entry must state:
 - `entries/production-gates-and-checkpoints.md` — stage gating, predecessor validation and approval-policy failure handling (OpenMontage).
 - `entries/deterministic-media-execution-and-verification.md` — deterministic media execution, process/output safety and technical verification (FFmpeg Skill).
 
+- `entries/production-design-and-visual-development-workflow.md` — production design (node 04) and visual development (node 09), their role boundaries, design-to-execution workflows, deliverables, acceptance and failure routing. Industry-role research synthesis; runtime not tested.
+
 ## Evidence policy
 
 A source citation is not proof of runtime behavior. Static review, upstream test-file inspection, executed tests, and runtime/integration validation are separate evidence levels. Do not promote an entry to production-ready merely because it is documented here.
