@@ -12,12 +12,14 @@ A continuously maintained discovery, review, classification, and curation system
 - Generated updates are proposed through pull requests. Human review is required before merging.
 - A repository license does not automatically cover third-party assets or linked resources.
 
-## MVP
+## Current capabilities
 
 - GitHub repository discovery (scheduled and manual).
 - Recursive repository-tree scan for `SKILL.md`.
 - Frontmatter metadata extraction, category mapping, commit pinning, and preliminary license state.
 - JSON and Markdown catalog output.
+- L1 metadata and repository-structure triage with explicit limitations.
+- Schema validation for generated catalog and L1 review records.
 - Unit tests and PR-only publication.
 
 ## Run locally
@@ -27,6 +29,9 @@ Requires Python 3.10+ and a GitHub token for higher API rate limits.
 ```bash
 python -m unittest discover -s tests -v
 GITHUB_TOKEN=... python scripts/discover.py
+python scripts/validate_catalog.py resources
+python scripts/review_l1.py
+python scripts/validate_catalog.py l1
 ```
 
 The discovery process reads public metadata and text files only. It does not clone repositories, install dependencies, or execute upstream scripts.
