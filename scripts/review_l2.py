@@ -129,7 +129,10 @@ def main():
         try: results.append(review_resource(card))
         except Exception as exc:
             results.append({"repository":card["repository"],"commit":card["commit"],"skill_path":card["path"],
-                            "review_level":"L2","disposition":"BLOCKED","review_errors":[{"error":str(exc)}],
+                            "review_level":"L2","disposition":"BLOCKED","tree_truncated":False,
+                            "files_indexed":0,"files_selected":0,"files_read":0,"file_kind_counts":{},
+                            "file_evidence":[],"mechanism_findings":[],
+                            "review_errors":[{"path":"__repository__","error":str(exc)}],
                             "runtime_tested":False,"source_code_executed":False})
         time.sleep(0.5)
     result={"review_level":"L2","generated_at":dt.datetime.now(dt.timezone.utc).isoformat(),
