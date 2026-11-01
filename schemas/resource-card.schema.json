@@ -96,6 +96,32 @@
     "source_text_read": {
       "type": "boolean",
       "description": "Whether the pinned SKILL.md content was successfully fetched within the configured size limit."
+    },
+    "repository_description": {
+      "type": "string"
+    },
+    "repository_archived": {
+      "type": "boolean"
+    },
+    "repository_pushed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "repository_stars": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "readme_present": {
+      "type": "boolean"
+    },
+    "frontmatter_name_present": {
+      "type": "boolean"
+    },
+    "frontmatter_description_present": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false
