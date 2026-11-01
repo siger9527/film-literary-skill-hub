@@ -40,11 +40,12 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git checkout -B bot/discovery-update
+            update_branch="bot/discovery-update-${GITHUB_RUN_ID}"
+            git switch -c "$update_branch"
             git add catalog/generated
             git commit -m "chore(catalog): refresh discovered Skill resources"
-            git push --force-with-lease origin bot/discovery-update
-            gh pr create --title "chore(catalog): refresh discovered Skill resources" --body "Automated discovery update. Review source pins, categories, and license evidence before merging." --base main --head bot/discovery-update || true
+            git push origin "$update_branch"
+            gh pr create --title "chore(catalog): refresh discovered Skill resources" --body "Automated discovery update. Review source pins, categories, and license evidence before merging. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" --base main --head "$update_branch"
           else
             echo "No catalog changes."
           fi
