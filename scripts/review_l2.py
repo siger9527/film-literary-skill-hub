@@ -13,13 +13,12 @@ ROOT = Path(__file__).resolve().parents[1]
 API = "https://api.github.com"
 UA = "film-literary-skill-hub/0.1"
 MAX_FILE_BYTES = 200_000
-MAX_FILES_PER_REPOSITORY = 120
+MAX_FILES_PER_REPOSITORY = 60
 
 class ReviewBlocked(RuntimeError):
     def __init__(self, message, tree_truncated=False):
         super().__init__(message)
         self.tree_truncated = tree_truncated
-MAX_FILES_PER_REPOSITORY = 120
 TEXT_SUFFIXES = {".py", ".js", ".ts", ".tsx", ".jsx", ".sh", ".yml", ".yaml", ".json", ".toml", ".md", ".txt", ".ps1", ".bat"}
 
 def api_json(url):
