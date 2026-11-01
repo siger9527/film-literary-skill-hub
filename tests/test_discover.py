@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
@@ -30,6 +31,20 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(mod.license_state({"tree":[{"type":"blob","path":"subdir/LICENSE"}]}),
                          ("LICENSE_SCOPE_UNCLEAR", "subdir/LICENSE"))
         self.assertEqual(mod.license_state({"tree":[]}), ("NO_LICENSE_FOUND", None))
+
+    def test_discovery_records_query_and_seed_failures(self):
+        def fake_request(url):
+            if "/search/repositories?" in url:
+                raise RuntimeError("search unavailable")
+            raise RuntimeError("seed unavailable")
+        with patch.object(mod, "request_json", side_effect=fake_request):
+            found, errors = mod.discover_repositories(
+                {"queries": ["film skills"], "seed_repositories": ["owner/repo"]}, 5
+            )
+        self.assertEqual(found, {})
+        self.assertEqual(len(errors), 2)
+        self.assertEqual({item.get("query") or item.get("repository") for item in errors},
+                         {"film skills", "owner/repo"})
 
 if __name__ == "__main__":
     unittest.main()
