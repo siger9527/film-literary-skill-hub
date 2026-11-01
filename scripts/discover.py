@@ -25,7 +25,10 @@ def get_repo(full_name):
     return request_json(f"{API}/repos/{full_name}")
 
 def get_tree(full_name, sha):
-    return request_json(f"{API}/repos/{full_name}/git/trees/{sha}?recursive=1")
+    tree = request_json(f"{API}/repos/{full_name}/git/trees/{sha}?recursive=1")
+    if tree.get("truncated"):
+        raise RuntimeError("Git tree response was truncated; refusing to publish an incomplete repository scan")
+    return tree
 
 def raw_text(full_name, sha, path):
     url = f"https://raw.githubusercontent.com/{full_name}/{sha}/{urllib.parse.quote(path)}"
@@ -34,10 +37,10 @@ def raw_text(full_name, sha, path):
         with urllib.request.urlopen(req, timeout=20) as response:
             data = response.read(200_001)
         if len(data) > 200_000:
-            return ""
+            return None
         return data.decode("utf-8", "replace")
     except Exception:
-        return ""
+        return None
 
 def parse_frontmatter(text):
     result = {}
@@ -52,16 +55,18 @@ def parse_frontmatter(text):
             result[match.group(1)] = match.group(2).strip('"\'')
     return result
 
-def license_state(repo, sha, tree):
+def license_state(tree):
     candidates = [
         item["path"] for item in tree.get("tree", [])
         if item.get("type") == "blob"
         and re.fullmatch(r"(?i)(license|licence)(\.[a-z0-9]+)?", item["path"].split("/")[-1])
     ]
-    if not candidates:
-        return "NO_LICENSE_FOUND", None
-    root = next((path for path in candidates if "/" not in path), candidates[0])
-    return "LICENSED_REVIEW_REQUIRED", root
+    root = next((path for path in candidates if "/" not in path), None)
+    if root:
+        return "LICENSED_REVIEW_REQUIRED", root
+    if candidates:
+        return "LICENSE_SCOPE_UNCLEAR", sorted(candidates)[0]
+    return "NO_LICENSE_FOUND", None
 
 def classify(name, description, content, categories):
     haystack = (name + " " + description + " " + content[:5000]).lower()
@@ -110,9 +115,12 @@ def main():
                 item["path"] for item in tree.get("tree", [])
                 if item.get("type") == "blob" and item["path"].split("/")[-1].lower() == "skill.md"
             ]
-            license_status, license_file = license_state(metadata, sha, tree)
+            license_status, license_file = license_state(tree)
             for path in skill_paths[:config["max_skill_files_per_repository"]]:
                 body = raw_text(full_name, sha, path)
+                if body is None:
+                    errors.append({"repository": full_name, "path": path, "error": "Skill file could not be read or exceeded 200 KB"})
+                    body = ""
                 frontmatter = parse_frontmatter(body)
                 skill_name = frontmatter.get("name") or Path(path).parent.name or metadata["name"]
                 description = frontmatter.get("description") or metadata.get("description") or ""
@@ -121,7 +129,7 @@ def main():
                     "description": description[:500],
                     "source_url": f"https://github.com/{full_name}/blob/{sha}/{path}",
                     "license_status": license_status, "license_file": license_file,
-                    "review_status": "DISCOVERED",
+                    "review_status": "DISCOVERED", "source_text_read": bool(body),
                     "categories": classify(skill_name, description, body, categories),
                     "evidence": [f"Repository metadata: https://github.com/{full_name}",
                                  f"Commit-pinned Skill file: https://github.com/{full_name}/blob/{sha}/{path}"],
