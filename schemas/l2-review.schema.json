@@ -45,7 +45,7 @@
       ]
     },
     "tree_truncated": {
-      "const": false
+      "type": "boolean"
     },
     "files_indexed": {
       "type": "integer",
