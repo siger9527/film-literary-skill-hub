@@ -30,3 +30,9 @@
 ## 当前缺口与后续研究
 
 已有相关知识条目，但不代表本节点完整专业体系或生产验证通过。后续补齐岗位方法、质量标准、交接接口和真实任务验证。
+
+## 新增专业研究条目
+
+- [Asset, Visual Execution, Video Generation, Animation and VFX](../../../knowledge-base/entries/asset-visual-execution-video-generation-animation-vfx.md) — 四节点专业边界、资产身份/版本、视觉执行编译、动态镜头任务生命周期、VFX修复决策、交接验收与失败分类。
+
+**证据等级：** 固定Commit源码/文档静态审查（L2）；未执行上游软件、模型或真实镜头，未完成生产验证。状态保持 PARTIAL_RESEARCH。

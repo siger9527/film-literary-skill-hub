@@ -21,6 +21,8 @@ Every entry must state:
 
 - `entries/production-design-and-visual-development-workflow.md` — production design (node 04) and visual development (node 09), their role boundaries, design-to-execution workflows, deliverables, acceptance and failure routing. Industry-role research synthesis; runtime not tested.
 
+- `entries/asset-visual-execution-video-generation-animation-vfx.md` — nodes 10–13: asset identity/version/publishing, visual execution compilation, video generation lifecycle and VFX repair; AYON Core, ComfyUI, Wan2.1 and Natron pinned-source review. L2 static review; runtime not tested.
+
 ## Evidence policy
 
 A source citation is not proof of runtime behavior. Static review, upstream test-file inspection, executed tests, and runtime/integration validation are separate evidence levels. Do not promote an entry to production-ready merely because it is documented here.
