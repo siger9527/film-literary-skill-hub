@@ -1,0 +1,15 @@
+{
+  "queries": [
+    "agent skills filmmaking film production",
+    "screenwriting screenplay writing agent skill",
+    "animation storyboard cinematography agent skill",
+    "video editing post production sound design agent skill",
+    "literature fiction storytelling worldbuilding agent skill"
+  ],
+  "seed_repositories": [
+    "calesthio/OpenMontage",
+    "kajisho5/ffmpeg-skill"
+  ],
+  "max_repositories_per_query": 15,
+  "max_skill_files_per_repository": 30
+}
