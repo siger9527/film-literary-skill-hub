@@ -85,11 +85,16 @@ def classify(name, description, content, categories):
 
 def discover_repositories(config, limit):
     found = {}
+    errors = []
     for query in config["queries"]:
         url = API + "/search/repositories?" + urllib.parse.urlencode({
             "q": query + " fork:false", "sort": "updated", "order": "desc", "per_page": min(limit, 30)
         })
-        data = request_json(url)
+        try:
+            data = request_json(url)
+        except Exception as exc:
+            errors.append({"query": query, "error": str(exc)})
+            continue
         for item in data.get("items", []):
             found[item["full_name"]] = item
         time.sleep(1)
@@ -97,8 +102,8 @@ def discover_repositories(config, limit):
         try:
             found[name] = get_repo(name)
         except Exception as exc:
-            print(f"seed skipped {name}: {exc}", file=sys.stderr)
-    return found
+            errors.append({"repository": name, "error": str(exc)})
+    return found, errors
 
 def main():
     parser = argparse.ArgumentParser()
@@ -107,10 +112,10 @@ def main():
     args = parser.parse_args()
     config = json.loads((ROOT / "config/sources.json").read_text("utf-8"))
     categories = json.loads((ROOT / "config/categories.json").read_text("utf-8"))
-    repositories = discover_repositories(config, args.limit or config["max_repositories_per_query"])
+    repositories, discovery_errors = discover_repositories(config, args.limit or config["max_repositories_per_query"])
     output = ROOT / args.output
     output.mkdir(parents=True, exist_ok=True)
-    cards, errors = [], []
+    cards, errors = [], list(discovery_errors)
     for full_name, metadata in sorted(repositories.items()):
         try:
             branch_name = metadata["default_branch"]
@@ -150,6 +155,9 @@ def main():
             errors.append({"repository": full_name, "error": str(exc)})
     if errors:
         (output / "errors.json").write_text(json.dumps(errors, ensure_ascii=False, indent=2) + "\n", "utf-8")
+        raise RuntimeError(f"Discovery incomplete: {len(errors)} error(s). Existing catalog was not replaced; inspect {output / 'errors.json'}")
+    if errors:
+        (output / "errors.json").write_text(json.dumps(errors, ensure_ascii=False, indent=2) + "\\n", "utf-8")
         raise RuntimeError(f"Discovery incomplete: {len(errors)} error(s). Existing catalog was not replaced; inspect {output / 'errors.json'}")
     cards.sort(key=lambda item: (item["repository"], item["path"]))
     generated = dt.datetime.now(dt.timezone.utc).isoformat()
